@@ -6,7 +6,7 @@
 
 ## 🌟 Live Demo
 
-[View Funfinity on Vercel](https://inclusive-game-design.vercel.app/)  
+[View Funfinity on Vercel](https://funfinity-game.vercel.app/)  
 
 ---
 
