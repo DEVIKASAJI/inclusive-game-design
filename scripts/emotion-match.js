@@ -668,7 +668,7 @@ class EmotionMatchGame {
                 }
             });
             
-            this.showFeedback(`That's ${this.currentEmotion.word.toLowerCase()}, not ${selectedOption.textContent.toLowerCase()}.`, 'incorrect');
+            this.showFeedback(`Great effort! The correct answer was ${this.currentEmotion.word.toLowerCase()}. Keep practicing and you'll get it!`, 'incorrect');
             this.playSound('incorrect');
         }
         
