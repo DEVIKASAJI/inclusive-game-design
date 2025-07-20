@@ -12,11 +12,14 @@
 
 ## 🎮 Games Included
 
-- **Emotion Faces Match**  
+- **Mimix**  
   Learn to recognize and express emotions using your own facial expressions and real-time face detection.
 
 - **Calm Quest**  
   Guide a hot air balloon with mindful breathing. Inhale (hold), exhale (release), and collect stars in a relaxing, pressure-free environment.
+
+- **Starflip**  
+  A space-themed memory game! Flip cards to match pairs of space objects. Play solo or with a friend.
 
 ---
 
@@ -35,7 +38,7 @@
   - Optional audio cues and clear instructions
 
 - **Face Detection:**  
-  [face-api.js](https://github.com/justadudewhohacks/face-api.js) for real-time emotion recognition in the Emotion Faces Match game.
+  [face-api.js](https://github.com/justadudewhohacks/face-api.js) for real-time emotion recognition in the Mimix game.
 
 - **Hosting:**  
   [Vercel](https://vercel.com/) for fast, free, and collaborative deployment.
@@ -49,6 +52,7 @@ inclusive-game-design/
   accesiblegames/         # Standalone HTML files for each game
     calm-quest.html
     emotion-match.html
+    starflip.html
   scripts/                # JavaScript files for game logic
     calm-quest.js
     emotion-match.js
