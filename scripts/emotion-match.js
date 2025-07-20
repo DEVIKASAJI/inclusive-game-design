@@ -612,6 +612,7 @@ class EmotionMatchGame {
 
         // Shuffle the options in the container
         this.shuffleOptions(optionsContainer);
+        this.animateOptions(); // Animate options after generation
     }
 
     createOption(word, isCorrect) {
@@ -668,7 +669,11 @@ class EmotionMatchGame {
                 }
             });
             
-            this.showFeedback(`Great effort! The correct answer was ${this.currentEmotion.word.toLowerCase()}. Keep practicing and you'll get it!`, 'incorrect');
+            // --- CHANGED: More positive, motivating feedback ---
+            this.showFeedback(
+                `Nice try! The correct answer was ${this.currentEmotion.word.toLowerCase()}. Keep going, you're learning more every time! 🌟`,
+                'incorrect'
+            );
             this.playSound('incorrect');
         }
         
@@ -683,10 +688,16 @@ class EmotionMatchGame {
     }
     
     showFeedback(message, type) {
-        const feedbackElement = document.getElementById('feedback-message');
-        if (feedbackElement) {
-            feedbackElement.textContent = message;
-            feedbackElement.className = `feedback-message ${type}`;
+        const feedback = document.getElementById('feedback-message');
+        if (!feedback) return;
+        feedback.textContent = message;
+        feedback.classList.remove('correct', 'incorrect', 'neutral', 'animated-feedback');
+        void feedback.offsetWidth; // force reflow for animation
+        feedback.classList.add('animated-feedback');
+        if (type) feedback.classList.add(type);
+        // Confetti for correct answer
+        if (type === 'correct') {
+            this.launchConfetti();
         }
     }
     
@@ -797,6 +808,46 @@ class EmotionMatchGame {
         `;
         
         this.showFeedback(helpMessage, 'help');
+    }
+
+    // Add confetti effect (emoji-based, simple)
+    launchConfetti() {
+        const container = document.querySelector('.game-container');
+        if (!container) return;
+        const confettiCount = 24;
+        for (let i = 0; i < confettiCount; i++) {
+            const conf = document.createElement('span');
+            conf.textContent = ['🎉','✨','🥳','🎊'][Math.floor(Math.random()*4)];
+            conf.style.position = 'absolute';
+            conf.style.left = Math.random() * 90 + '%';
+            conf.style.top = '-30px';
+            conf.style.fontSize = (Math.random() * 1.5 + 1.2) + 'rem';
+            conf.style.pointerEvents = 'none';
+            conf.style.transition = 'transform 1.2s cubic-bezier(.68,-0.55,.27,1.55), opacity 1.2s';
+            conf.style.zIndex = 1000;
+            container.appendChild(conf);
+            setTimeout(() => {
+                conf.style.transform = `translateY(${Math.random()*350+180}px) rotate(${Math.random()*360}deg)`;
+                conf.style.opacity = 0;
+            }, 10);
+            setTimeout(() => {
+                conf.remove();
+            }, 1400);
+        }
+    }
+
+    // Animate options on appear/selection
+    animateOptions() {
+        const options = document.querySelectorAll('.emotion-option');
+        options.forEach((opt, idx) => {
+            opt.style.opacity = 0;
+            opt.style.transform = 'translateY(30px) scale(0.95)';
+            setTimeout(() => {
+                opt.style.transition = 'all 0.5s cubic-bezier(.68,-0.55,.27,1.55)';
+                opt.style.opacity = 1;
+                opt.style.transform = 'translateY(0) scale(1)';
+            }, 80 + idx * 100);
+        });
     }
     
     // Cleanup method

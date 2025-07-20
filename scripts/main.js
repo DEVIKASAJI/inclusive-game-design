@@ -158,47 +158,54 @@ class AccessibleGamesWebsite {
     }
     
     loadEmotionMatchGame(container) {
-        // Create game HTML
         container.innerHTML = `
             <div class="game-container">
-                <header class="game-header">
-                    <h1>😊 Emotion Faces Match 😊</h1>
-                    <div class="score-display">
-                        <span>Score: <span id="score">0</span></span>
-                        <span>Level: <span id="level">1</span></span>
+                <header class="game-header sticky-header">
+                    <div class="header-left">
+                        <h1>😊 Emotion Faces Match 😊</h1>
+                    </div>
+                    <div class="header-right">
+                        <button id="settings-btn" class="btn icon" aria-label="Settings">⚙️</button>
+                        <button id="close-btn" class="btn icon" aria-label="Close" onclick="window.website.closeGame()">✖️</button>
                     </div>
                 </header>
-
+                <div class="scorebar animated-bar">
+                    <span>Score: <span id="score">0</span></span>
+                    <span>Level: <span id="level">1</span></span>
+                    <span id="timer-area">⏱️ <span id="timer">01:00</span></span>
+                    <div class="progress-bar" aria-label="Progress">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                </div>
                 <main class="game-main">
                     <div class="emotion-display">
                         <div class="main-emotion">
-                            <div id="main-emotion-face" class="emotion-face large"></div>
-                            <p id="emotion-instruction" class="instruction">Match the emotion!</p>
+                            <div id="main-emotion-face" class="emotion-face large animated-face"></div>
+                            <p id="emotion-instruction" class="instruction" aria-live="polite">Match the emotion!</p>
                         </div>
                     </div>
-
+                    <div class="camera-controls-area">
+                        <div id="camera-controls"></div>
+                        <div id="face-status" class="face-status"></div>
+                    </div>
                     <div class="matching-area">
-                        <div class="options-container" id="options-container">
+                        <div class="options-container animated-options" id="options-container">
                             <!-- Emotion options will be generated here -->
                         </div>
                     </div>
-
                     <div class="feedback-area">
-                        <div id="feedback-message" class="feedback-message"></div>
-                        <div id="progress-bar" class="progress-bar">
-                            <div id="progress-fill" class="progress-fill"></div>
-                        </div>
+                        <div id="feedback-message" class="feedback-message animated-feedback" aria-live="assertive"></div>
                     </div>
                 </main>
-
-                <div class="controls">
+                <!-- Fixed bottom controls -->
+                <div class="controls fixed-controls">
                     <button id="new-game-btn" class="btn primary">New Game</button>
+                    <button id="pause-btn" class="btn secondary">Pause</button>
                     <button id="help-btn" class="btn secondary">Help</button>
                 </div>
             </div>
         `;
-        
-        // Initialize the emotion match game
+        // Settings modal is now outside the game container, see index.html or modal root.
         if (window.EmotionMatchGame) {
             new window.EmotionMatchGame();
         }
@@ -259,14 +266,77 @@ function showSection(sectionName) {
 }
 
 function loadGame(gameName) {
-    if (window.website) {
-        window.website.loadGame(gameName);
+    if (gameName === 'emotion-match') {
+        // Inject the required HTML for the game
+        document.getElementById('game-container').innerHTML = `
+            <div class="emotion-display">
+                <div id="main-emotion-face"></div>
+                <div id="emotion-instruction"></div>
+                <div id="options-container"></div>
+                <div id="feedback-message" class="feedback-message"></div>
+                <div class="score-level">
+                    <span>Score: <span id="score">0</span></span>
+                    <span>Level: <span id="level">1</span></span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div id="progress-fill"></div>
+                </div>
+                <div>
+                    <button id="new-game-btn" class="btn">New Game</button>
+                    <button id="help-btn" class="btn">Help</button>
+                </div>
+            </div>
+        `;
+        // Show the modal
+        document.getElementById('game-modal').style.display = 'block';
+        // Initialize the game
+        window.emotionGame = new EmotionMatchGame();
     }
 }
 
 function closeGame() {
-    if (window.website) {
-        window.website.closeGame();
+    document.getElementById('game-modal').style.display = 'none';
+    document.getElementById('game-container').innerHTML = '';
+    if (window.emotionGame && typeof window.emotionGame.cleanup === 'function') {
+        window.emotionGame.cleanup();
+    }
+}
+
+// Optional: Hide modal when clicking outside content
+window.onclick = function(event) {
+    const modal = document.getElementById('game-modal');
+    if (event.target === modal) {
+        closeGame();
+    }
+}
+
+// Settings modal logic
+function setupSettingsModal() {
+    const settingsBtn = document.getElementById('settings-btn');
+    const settingsModal = document.getElementById('settings-modal');
+    const settingsCloseBtn = document.getElementById('settings-close-btn');
+
+    if (settingsBtn && settingsModal && settingsCloseBtn) {
+        settingsBtn.addEventListener('click', () => {
+            settingsModal.style.display = 'block';
+            settingsModal.setAttribute('aria-modal', 'true');
+            settingsModal.setAttribute('role', 'dialog');
+            settingsCloseBtn.focus();
+        });
+        settingsCloseBtn.addEventListener('click', () => {
+            settingsModal.style.display = 'none';
+        });
+        window.addEventListener('click', (event) => {
+            if (event.target === settingsModal) {
+                settingsModal.style.display = 'none';
+            }
+        });
+        // Keyboard accessibility: ESC closes modal
+        document.addEventListener('keydown', (e) => {
+            if (settingsModal.style.display === 'block' && e.key === 'Escape') {
+                settingsModal.style.display = 'none';
+            }
+        });
     }
 }
 
@@ -279,4 +349,5 @@ document.addEventListener('DOMContentLoaded', () => {
     if (hash) {
         window.website.showSection(hash);
     }
+    setupSettingsModal();
 }); 

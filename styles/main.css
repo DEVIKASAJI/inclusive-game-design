@@ -489,23 +489,30 @@ body::after {
     display: none;
     position: fixed;
     z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    animation: fadeIn 0.3s ease;
+    left: 0; top: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.4);
+    overflow: auto;
 }
-
 .modal-content {
-    background-color: white;
+    background: #fff;
     margin: 5% auto;
     border-radius: 20px;
-    width: 90%;
-    max-width: 800px;
+    padding: 30px 20px;
+    width: 95%;
+    max-width: 480px;
     position: relative;
-    animation: slideIn 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
 }
+.close {
+    position: absolute;
+    top: 12px; right: 18px;
+    font-size: 2rem;
+    color: #888;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 2;
+}
+.close:hover { color: #ff4e50; }
 
 .game-modal {
     margin: 2% auto;
@@ -518,22 +525,6 @@ body::after {
 @keyframes slideIn {
     from { transform: translateY(-50px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    position: absolute;
-    right: 20px;
-    top: 15px;
-    z-index: 1001;
-}
-
-.close:hover {
-    color: #000;
 }
 
 /* Responsive Design */

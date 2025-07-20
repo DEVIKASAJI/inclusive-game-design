@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Faces Match - Accessible Games</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/games.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+</head>
+<body>
+    <!-- Game Modal (always open on this page) -->
+    <div id="game-modal" class="modal" style="display:block;">
+        <div class="modal-content game-modal">
+            <div class="game-container">
+                <span class="decoration-emoji emoji1">🎈</span>
+                <span class="decoration-emoji emoji2">🦄</span>
+                <span class="decoration-emoji emoji3">🌈</span>
+                <span class="decoration-emoji emoji4">✨</span>
+                <header class="game-header sticky-header">
+                    <div class="header-left">
+                        <h1>😊 Emotion Faces Match 😊</h1>
+                    </div>
+                    <div class="header-right">
+                        <button id="settings-btn" class="btn icon" aria-label="Settings">⚙️</button>
+                        <button id="close-btn" class="btn icon" aria-label="Close">✖️</button>
+                    </div>
+                </header>
+                <div class="scorebar animated-bar">
+                    <span id="score" data-emoji="⭐">Score: <span>0</span></span>
+                    <span id="level" data-emoji="🎯">Level: <span>1</span></span>
+                    <span id="timer-area" data-emoji="⏰">⏱️ <span id="timer">01:00</span></span>
+                    <div class="progress-bar" aria-label="Progress">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                </div>
+                <main class="game-main">
+                    <div class="emotion-display">
+                        <div class="main-emotion">
+                            <div id="main-emotion-face" class="emotion-face large animated-face"></div>
+                            <p id="emotion-instruction" class="instruction" aria-live="polite">Match the emotion!</p>
+                        </div>
+                    </div>
+                    <div class="camera-controls-area">
+                        <div id="camera-controls"></div>
+                        <div id="face-status" class="face-status"></div>
+                    </div>
+                    <div class="matching-area">
+                        <div class="options-container animated-options" id="options-container">
+                            <!-- Emotion options will be generated here -->
+                        </div>
+                    </div>
+                    <div class="feedback-area">
+                        <div id="feedback-message" class="feedback-message animated-feedback" aria-live="assertive"></div>
+                    </div>
+                </main>
+                <!-- Fixed bottom controls -->
+                <div class="controls fixed-controls">
+                    <button id="new-game-btn" class="btn primary">New Game</button>
+                    <button id="pause-btn" class="btn secondary">Pause</button>
+                    <button id="help-btn" class="btn secondary">Help</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal (true overlay) -->
+    <div id="settings-modal" class="modal" style="display:none;">
+        <div class="modal-content settings-modal-content">
+            <span class="close" id="settings-close-btn">&times;</span>
+            <h2>Settings</h2>
+            <div class="settings-options">
+                <label><input type="checkbox" id="sound-toggle" checked> Sound On</label><br>
+                <label><input type="checkbox" id="contrast-toggle"> High Contrast</label><br>
+                <label><input type="checkbox" id="motion-toggle"> Reduced Motion</label><br>
+                <label><input type="checkbox" id="face-toggle" checked> Face Recognition</label><br>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/emotion-match.js"></script>
+    <script>
+    // Initialize the Emotion Match game logic on this static UI
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.EmotionMatchGame) {
+            new window.EmotionMatchGame();
+        }
+        // Settings modal logic
+        const settingsBtn = document.getElementById('settings-btn');
+        const settingsModal = document.getElementById('settings-modal');
+        const settingsCloseBtn = document.getElementById('settings-close-btn');
+        if (settingsBtn && settingsModal && settingsCloseBtn) {
+            settingsBtn.addEventListener('click', () => {
+                settingsModal.style.display = 'block';
+                settingsModal.setAttribute('aria-modal', 'true');
+                settingsModal.setAttribute('role', 'dialog');
+                settingsCloseBtn.focus();
+            });
+            settingsCloseBtn.addEventListener('click', () => {
+                settingsModal.style.display = 'none';
+            });
+            window.addEventListener('click', (event) => {
+                if (event.target === settingsModal) {
+                    settingsModal.style.display = 'none';
+                }
+            });
+            document.addEventListener('keydown', (e) => {
+                if (settingsModal.style.display === 'block' && e.key === 'Escape') {
+                    settingsModal.style.display = 'none';
+                }
+            });
+        }
+        // Close modal button
+        const closeBtn = document.getElementById('close-btn');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                window.location.href = '../index.html';
+            });
+        }
+    });
+    </script>
+</body>
+</html> 
