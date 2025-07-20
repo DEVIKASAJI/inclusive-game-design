@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessible Games for Children</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/games.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+</head>
+<body>
+    <div class="website-container">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <h1 class="site-title">🌟 Accessible Games 🌟</h1>
+                <p class="site-subtitle">Fun learning games for children with disabilities</p>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
+                <li><a href="#games" class="nav-link" data-section="games">Games</a></li>
+                <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+                <li><a href="#help" class="nav-link" data-section="help">Help</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Home Section -->
+            <section id="home" class="content-section active">
+                <div class="welcome-container">
+                    <!-- Playful SVG/emoji decorations -->
+                    <div style="position: absolute; left: 2%; top: 2%; font-size: 2.5rem; z-index: 2; pointer-events: none;">🎈</div>
+                    <div style="position: absolute; right: 3%; top: 8%; font-size: 2.2rem; z-index: 2; pointer-events: none;">🦄</div>
+                    <div style="position: absolute; left: 5%; bottom: 8%; font-size: 2.2rem; z-index: 2; pointer-events: none;">🌈</div>
+                    <div style="position: absolute; right: 5%; bottom: 5%; font-size: 2.5rem; z-index: 2; pointer-events: none;">✨</div>
+                    <!-- Enhanced Welcome Message -->
+                    <h2 style="background: linear-gradient(90deg, #ffb347 0%, #76e2fe 100%); color: #fff; border-radius: 20px; padding: 0.5em 1em; display: inline-block; box-shadow: 0 2px 12px rgba(255,179,71,0.10); margin-bottom: 1rem;">Welcome to Accessible Games! <span aria-hidden="true">🎉</span></h2>
+                    <p style="font-size: 1.3rem; color: #555; margin-bottom: 2.5rem;">Discover fun and educational games designed specifically for children with disabilities.</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🎮</div>
+                            <h3>Easy to Play</h3>
+                            <p>Simple controls and clear instructions</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🔊</div>
+                            <h3>Audio Support</h3>
+                            <p>Helpful sounds and feedback</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">👁️</div>
+                            <h3>Visual Friendly</h3>
+                            <p>Large, clear graphics and text</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">📱</div>
+                            <h3>Mobile Ready</h3>
+                            <p>Works on all devices</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">📷</div>
+                            <h3>Face Recognition</h3>
+                            <p>Use your expressions to play!</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <h3>Accessible</h3>
+                            <p>Designed for all abilities</p>
+                        </div>
+                    </div>
+
+                    <div class="cta-buttons">
+                        <button class="btn primary playful-bounce" onclick="showSection('games')">Start Playing <span aria-hidden="true">🚀</span></button>
+                        <button class="btn secondary playful-bounce" onclick="showSection('about')">Learn More <span aria-hidden="true">💡</span></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Games Section -->
+            <section id="games" class="content-section">
+                <div class="games-container">
+                    <h2>Choose Your Game</h2>
+                    <p>Click on any game to start playing!</p>
+                    
+                    <div class="games-grid">
+                        <div class="game-card" onclick="loadGame('emotion-match')">
+                            <div class="game-icon">😊</div>
+                            <h3>Emotion Faces Match</h3>
+                            <p>Learn to recognize different emotions through facial expressions and face recognition!</p>
+                            <div class="game-tags">
+                                <span class="tag">Autism</span>
+                                <span class="tag">Cognitive</span>
+                                <span class="tag">Face Recognition</span>
+                            </div>
+                        </div>
+                        
+                        <div class="game-card coming-soon">
+                            <div class="game-icon">🎵</div>
+                            <h3>Sound Patterns</h3>
+                            <p>Match sounds and create musical patterns</p>
+                            <div class="game-tags">
+                                <span class="tag">Auditory</span>
+                                <span class="tag">Learning</span>
+                            </div>
+                            <div class="coming-soon-badge">Coming Soon</div>
+                        </div>
+                        
+                        <div class="game-card coming-soon">
+                            <div class="game-icon">🎨</div>
+                            <h3>Color & Shape Match</h3>
+                            <p>Learn colors and shapes through interactive play</p>
+                            <div class="game-tags">
+                                <span class="tag">Visual</span>
+                                <span class="tag">Motor</span>
+                            </div>
+                            <div class="coming-soon-badge">Coming Soon</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="content-section">
+                <div class="about-container">
+                    <h2>About Our Games</h2>
+                    
+                    <div class="about-content">
+                        <div class="about-text">
+                            <h3>Our Mission</h3>
+                            <p>We create accessible educational games that help children with disabilities learn and grow in a fun, supportive environment.</p>
+                            
+                            <h3>New: Face Recognition Technology</h3>
+                            <p>Our Emotion Faces Match game now includes advanced face recognition technology! Children can use their own facial expressions to play, making the learning experience more interactive and engaging.</p>
+                            
+                            <h3>Accessibility Features</h3>
+                            <ul>
+                                <li>Large, easy-to-see buttons and text</li>
+                                <li>Clear audio feedback and instructions</li>
+                                <li>Simple, intuitive controls</li>
+                                <li>High contrast color options</li>
+                                <li>Keyboard and touch navigation</li>
+                                <li>Reduced motion support</li>
+                                <li>Face recognition for interactive play</li>
+                            </ul>
+                            
+                            <h3>Educational Benefits</h3>
+                            <ul>
+                                <li>Improves cognitive skills</li>
+                                <li>Enhances motor coordination</li>
+                                <li>Builds confidence and self-esteem</li>
+                                <li>Develops social-emotional skills</li>
+                                <li>Encourages independent learning</li>
+                                <li>Teaches emotion recognition through face recognition</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="about-image">
+                            <div class="placeholder-image">
+                                <span>📷</span>
+                                <p>Face Recognition</p>
+                                <p style="font-size: 0.9rem; margin-top: 10px;">Use your expressions to play!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Help Section -->
+            <section id="help" class="content-section">
+                <div class="help-container">
+                    <h2>Help & Support</h2>
+                    
+                    <div class="help-content">
+                        <div class="help-section">
+                            <h3>Face Recognition Setup</h3>
+                            <p>To use face recognition features:</p>
+                            <ol>
+                                <li>Allow camera access when prompted</li>
+                                <li>Ensure good lighting on your face</li>
+                                <li>Position yourself in front of the camera</li>
+                                <li>Make clear facial expressions</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="help-section">
+                            <h3>How to Play</h3>
+                            <p>Each game has simple instructions and is designed to be easy to understand and play.</p>
+                        </div>
+                        
+                        <div class="help-section">
+                            <h3>Accessibility Options</h3>
+                            <p>Our games automatically adapt to your device's accessibility settings, including high contrast mode and reduced motion preferences.</p>
+                        </div>
+                        
+                        <div class="help-section">
+                            <h3>Getting Started</h3>
+                            <ol>
+                                <li>Choose a game from the Games section</li>
+                                <li>Read the instructions carefully</li>
+                                <li>Start playing and have fun!</li>
+                                <li>Take breaks when needed</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="help-section">
+                            <h3>Privacy & Security</h3>
+                            <p>Face recognition runs entirely in your browser. No video or images are sent to our servers. Your privacy is protected.</p>
+                        </div>
+                        
+                        <div class="help-section">
+                            <h3>Contact Support</h3>
+                            <p>If you need help or have suggestions for improving our games, please contact us.</p>
+                            <button class="btn secondary">Contact Us</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <div class="footer-content">
+                <p>&copy; 2024 Accessible Games. Made with ❤️ for children with disabilities.</p>
+                <div class="footer-links">
+                    <a href="#privacy">Privacy</a>
+                    <a href="#terms">Terms</a>
+                    <a href="#accessibility">Accessibility</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Game Modal -->
+    <div id="game-modal" class="modal">
+        <div class="modal-content game-modal">
+            <span class="close" onclick="closeGame()">&times;</span>
+            <div id="game-container"></div>
+        </div>
+    </div>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/emotion-match.js"></script>
+</body>
+</html> 
