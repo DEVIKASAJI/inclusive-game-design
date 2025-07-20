@@ -266,6 +266,9 @@ function showSection(sectionName) {
 }
 
 function loadGame(gameName) {
+    if (gameName === 'calm-quest') {
+        gameUrl = 'accesiblegames/calm-quest.html';
+    }
     if (gameName === 'emotion-match') {
         // Inject the required HTML for the game
         document.getElementById('game-container').innerHTML = `

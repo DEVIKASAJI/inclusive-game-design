@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calm Quest – Hot Air Balloon Breathing Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Use the same fonts and styles as the main site -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/games.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(180deg, #b3e0ff 0%, #fffbe7 100%);
+            min-height: 100vh;
+            font-family: 'Comic Neue', Arial, sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .calm-quest-container {
+            max-width: 480px;
+            margin: 2.5rem auto 1.5rem auto;
+            background: rgba(255,255,255,0.95);
+            border-radius: 24px;
+            box-shadow: 0 4px 32px rgba(120,180,255,0.13);
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            position: relative;
+        }
+        .cq-header {
+            text-align: center;
+            margin-bottom: 1.2rem;
+        }
+        .cq-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ffb347;
+            letter-spacing: 1px;
+            margin-bottom: 0.2em;
+            background: linear-gradient(90deg, #ffb347 0%, #76e2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .cq-subtitle {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 0.7em;
+        }
+        .cq-instructions {
+            background: #fffbe7;
+            border-radius: 16px;
+            padding: 1em;
+            margin-bottom: 1.2em;
+            color: #7a5c00;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 8px rgba(255,179,71,0.08);
+        }
+        .cq-canvas-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1em;
+        }
+        #balloon-canvas {
+            border-radius: 18px;
+            box-shadow: 0 2px 16px rgba(118,226,254,0.13);
+            background: #e3f6ff;
+            border: 2px solid #ffb347;
+        }
+        .cq-info-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f7faff;
+            border-radius: 12px;
+            padding: 0.7em 1em;
+            font-size: 1.1rem;
+            color: #3a7ca5;
+            margin-bottom: 0.5em;
+            box-shadow: 0 1px 6px rgba(118,226,254,0.08);
+        }
+        .cq-breath-prompt {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffb347;
+            text-align: center;
+            margin-bottom: 0.5em;
+            min-height: 1.5em;
+            letter-spacing: 1px;
+        }
+        /* Playful emoji decorations */
+        .cq-emoji {
+            position: absolute;
+            font-size: 2.2rem;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .cq-emoji1 { left: -1.2rem; top: -1.2rem; }
+        .cq-emoji2 { right: -1.2rem; top: 1.2rem; }
+        .cq-emoji3 { left: 0.5rem; bottom: 0.5rem; }
+        .cq-emoji4 { right: 0.5rem; bottom: -1.2rem; }
+        @media (max-width: 600px) {
+            .calm-quest-container { padding: 1rem 0.2rem; }
+            #balloon-canvas { width: 98vw; max-width: 99vw; }
+        }
+    </style>
+</head>
+<body>
+    <div class="calm-quest-container">
+        <!-- Playful emoji decorations -->
+        <div class="cq-emoji cq-emoji1" aria-hidden="true">🎈</div>
+        <div class="cq-emoji cq-emoji2" aria-hidden="true">🌤️</div>
+        <div class="cq-emoji cq-emoji3" aria-hidden="true">⭐</div>
+        <div class="cq-emoji cq-emoji4" aria-hidden="true">🌈</div>
+
+        <div class="cq-header">
+            <div class="cq-title">Calm Quest</div>
+            <div class="cq-subtitle">Hot Air Balloon Breathing Game</div>
+        </div>
+        <div class="cq-instructions">
+            <b>How to Play:</b><br>
+            <span>Hold down the screen (or spacebar) to <b>inhale</b> and make the balloon rise.<br>
+            Release to <b>exhale</b> and let the balloon drift forward.<br>
+            Match the rhythm, collect stars, and enjoy a calm, mindful journey!<br>
+            <span aria-hidden="true">✨</span> No losing, just relaxing play.
+            </span>
+        </div>
+        <div class="cq-canvas-wrapper">
+            <canvas id="balloon-canvas" width="400" height="600" aria-label="Hot air balloon game area"></canvas>
+        </div>
+        <div class="cq-info-bar">
+            <span id="star-count">⭐ Stars: 0</span>
+            <span id="breath-prompt" class="cq-breath-prompt">Ready?</span>
+        </div>
+    </div>
+    <script src="../scripts/calm-quest.js"></script>
+</body>
+</html>
